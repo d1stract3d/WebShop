@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8">
+      <title>Shopping Cart Confirmation</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   </head>
+    <body style="background-color: #6c757d;">
+       <nav class="navbar navbar-dark bg-dark"><th:block th:include="/_header"></th:block></nav>
+     <div class="container">
+		<th:block th:include="/_menu"></th:block>
+		<br>
+		<h3 class="text-success">Confirmation</h3>
+		<br>
+		<h5 class="text-success">Customer Information:</h5>
+		<br>
+		<ul class="list-group">
+				<li class="list-group-item list-group-item-success">Name: <span th:utext="${myCart.customerInfo.name}"></span></li>
+				<li class="list-group-item list-group-item-success">Email: <span th:utext="${myCart.customerInfo.email}"></span></li>
+				<li class="list-group-item list-group-item-success">Phone: <span th:utext="${myCart.customerInfo.phone}"></span></li>
+				<li class="list-group-item list-group-item-success">Address: <span th:utext="${myCart.customerInfo.address}"></span></li>
+		</ul>
+		<br>
+		<h5 class="text-success">Cart Summary:</h5>
+		<br>
+		<ul class="list-group list-group-horizontal">
+  				<li class="list-group-item list-group-item-success">Quantity:<br><b>x<span th:utext="${myCart.quantityTotal}"></span></b></li>
+  				<li class="list-group-item list-group-item-success">Total:<br><b>$<span th:utext="${myCart.amountTotal}"></span></b></li>
+		</ul>
+		<br> 
+      
+      <div class="container" th:each="cartLineInfo : ${myCart.cartLines}">
+      <ul class="list-group list-group-horizontal">
+			<li class="list-group-item list-group-item-success"><img class="img-thumbnail rounded-circle mb-1" th:src="@{|/productImage?code=${cartLineInfo.productInfo.code}|}" width="40" height="20" /></li>
+<!--<li class="list-group-item list-group-item-success">Code: <span th:utext="${cartLineInfo.productInfo.code}"></span>  --><input type="hidden" name="code" th:value="${cartLineInfo.productInfo.code}" /><!--</li>-->
+				<li class="list-group-item list-group-item-success">Name:<br><b><span th:utext="${cartLineInfo.productInfo.name}"></span></b></li>
+				<li class="list-group-item list-group-item-success">Price:<br><b>$<span th:utext="${cartLineInfo.productInfo.price}"></span></b></li>
+				<li class="list-group-item list-group-item-success">Quantity:<br><b>x<span th:utext="${cartLineInfo.quantity}"></span></b></li>
+				<li class="list-group-item list-group-item-success">Subtotal:<br><b>$<span th:utext="${cartLineInfo.amount}"></span></b></li>
+		</ul>
+				<br>	
+      </div>
+      <br>
+      <form method="POST" th:action="@{/shoppingCartConfirmation}">
+		 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+		  <div class="btn-group mr-2" role="group" aria-label="First group">
+         <button type="submit" class="btn btn-outline-light"><a th:href="@{/shoppingCart}" class="text-success">Edit Cart</a></button></div>
+         <div class="btn-group mr-2" role="group" aria-label="First group">
+		 <button type="submit" class="btn btn-outline-light"><a th:href="@{/shoppingCartCustomer}" class="text-success">Edit Info</a></button></div>
+		 <div class="btn-group mr-2" role="group" aria-label="First group">
+         <button type="submit" class="btn btn-success">Confirm</button>
+         </div>
+         </div>
+      </form>
+		</div>
+   </body>
+</html>

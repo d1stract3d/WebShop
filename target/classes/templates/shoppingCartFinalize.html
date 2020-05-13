@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8">
+      <title>Shopping Cart Finalize</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   </head>
+    <body style="background-color: #6c757d;">
+       <nav class="navbar navbar-dark bg-dark"><th:block th:include="/_header"></th:block></nav>
+     <div class="container">
+		<th:block th:include="/_menu"></th:block>
+		<br>
+		<h3 class="text-success">Order Confirmed!</h3>
+		<br>
+		<h5 class="text-success">Thank you for your order.</h5>
+		<h6 class="text-success">Your order number is: <b><span th:utext="${lastOrderedCart.orderNum}"></span></b></h6>
+</div>
+   </body>
+</html>

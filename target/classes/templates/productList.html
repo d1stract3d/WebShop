@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+   <head>
+      <meta charset="UTF-8">
+      <title>Product List</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   </head>
+    <body style="background-color: #6c757d;">
+       <nav class="navbar navbar-dark bg-dark"><th:block th:include="/_header"></th:block></nav>
+       <div class="container"><th:block th:include="/_menu"></th:block>
+       <br>
+		<h3 class="text-success">Product List</h3>
+		<br>
+		<div th:each="prodInfo : ${paginationProducts.list}">
+		<ul class="list-group list-group-horizontal">
+			<li class="list-group-item list-group-item-success"><img class="img-thumbnail rounded-circle mb-1" th:src="@{|/productImage?code=${prodInfo.code}|}" width="80" height="80" /></li>
+				<li class="list-group-item list-group-item-success">Name:<b><br><span th:utext="${prodInfo.name}"></span></b></li>
+				<li class="list-group-item list-group-item-success">Price:<b><br>$<span th:utext="${prodInfo.price}"></span></b></li>
+				&nbsp;&nbsp;&nbsp;&nbsp
+				<button type="button" class="btn btn-success"><a th:href="@{|/buyProduct?code=${prodInfo.code}|}" class="text-white">Add to Cart</a></button>&nbsp;&nbsp;&nbsp;&nbsp
+		    <th:block sec:authorize="hasAuthority('ROLE_MANAGER')">
+                 <button type="button" class="btn btn-danger"><a class="text-white" th:href="@{|/admin/product?code=${prodInfo.code}|}">Edit</a></button>
+            </th:block>          
+            </ul>
+            <br>
+            </div>
+            <br>
+            <div th:if="${paginationProducts.totalPages > 1}">
+            <div class="btn-group" role="group">
+         <th:block th:each="page: ${paginationProducts.navigationPages}">
+         <button type="button" class="btn btn-success"><a th:if="${page != -1}" th:href="@{|/productList?page=${page}|}" th:utext="${page}" class="text-white"></a></button>
+         </th:block></div></div>
+         </div>
+   </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8">
+      <title>Product List</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   </head>
+    <body style="background-color: #6c757d;">
+       <nav class="navbar navbar-dark bg-dark"><th:block th:include="/_header"></th:block></nav>
+       <div class="container"><th:block th:include="/_menu"></th:block>
+       <h3 class="text-success">Order Information</h3><br>
+       <br>
+       <h6 class="text-success">Customer Information</h6><br>
+       <ul class="list-group">
+			<li class="list-group-item list-group-item-success">Name: <span
+				th:utext="${orderInfo.customerName}"></span></li>
+			<li class="list-group-item list-group-item-success">Email: <span
+				th:utext="${orderInfo.customerEmail}"></span></li>
+				<li class="list-group-item list-group-item-success">Phone: <span
+				th:utext="${orderInfo.customerPhone}"></span></li>
+			<li class="list-group-item list-group-item-success">Address: <span
+				th:utext="${orderInfo.customerAddress}"></span></li>
+		</ul>
+		<br>
+		<h6 class="text-success">Order Summary</h6><br>
+		
+		<ul class="list-group" th:each="orderDetailInfo : ${orderInfo.details}">
+		<li class="list-group-item list-group-item-success"><b><span
+				th:utext="${orderDetailInfo.quanity}"></span>x</b> <span
+				th:utext="${orderDetailInfo.productName}"></span> @ <b>$<span
+				th:utext="${orderDetailInfo.price}"></span></b>
+				</li> 
+		</ul>
+		<ul class="list-group">
+			<li class="list-group-item list-group-item-success"><b>Total: $<span
+				th:utext="${orderInfo.amount}"></span></b></li>
+		</ul>
+		
+         </div>
+   </body>
+</html>

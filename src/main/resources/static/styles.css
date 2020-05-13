@@ -1,0 +1,45 @@
+@charset "ISO-8859-1";
+@media screen and (max-width: 800px) {
+    .why{ display: flex;
+        flex-flow: column wrap;
+        flex-wrap: wrap;
+        flex-direction: column;}
+  }
+.centerz{
+    color: white;
+    background-color: #6c757d;
+    text-align: center;
+    padding: 3%;
+    font-weight: bolder;
+}
+.ok{
+    color: white;
+    text-align: center;
+    padding: 4%;
+}
+.alright{
+    letter-spacing: 2px;
+    word-spacing: 4px;
+}
+.fourohthree{
+	letter-spacing: 2px;
+    word-spacing: 4px;
+    color: orange;
+    text-align: center;
+    background-color: #6c757d;
+}
+html {
+    background-color: #6c757d;
+}
+body {
+    background-color: #6c757d;
+}
+h1 {
+background-color: #6c757d;
+}
+h4 {
+background-color: #6c757d;
+}
+.navbar {
+    border: 0;
+}

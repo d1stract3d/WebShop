@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8">
+      <title>Login</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+   <link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+</head>
+<body style="background-color: #6c757d;">
+	<nav class="navbar navbar-dark bg-dark">
+		<th:block th:include="/_header"></th:block>
+	</nav>
+    <br>
+	<div class="container">
+		<h1 class="text-success">Login</h1>
+		<!-- /login?error=true -->
+		<th:block
+			th:if="${#session != null && #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}">
+			<div th:if="${#request.getParameter('error') == 'true'}"
+				style="color: red; margin: 10px 0px;">
+				Login Failed!!!<br /> Reason : <span
+					th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}"></span>
+			</div>
+		</th:block>
+
+		<form method="POST" th:action="@{/j_spring_security_check}">
+			<div class="form-group">
+				<label>Username</label> <input type="text" name="userName"
+					class="form-control">
+			</div>
+			<div class="form-group">
+				<label>Password</label> <input type="password" name="password"
+					class="form-control">
+			</div>
+			<button type="submit" class="btn btn-success">Login</button>
+			<button type="reset" class="btn btn-outline-light">Reset</button>
+		</form>
+
+		<span th:utext="${error}"></span>
+
+	</div>
+       
+   </body>
+</html>

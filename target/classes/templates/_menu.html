@@ -1,0 +1,18 @@
+<div xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<body style="background-color: #6c757d;">
+<div class="container">
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+<div class="btn-group  btn-group-lg success" role="group">
+  <button type="button" class="btn btn-secondary"><a th:href="@{/}" class="text-success">Home</a></button></div>
+  <div class="btn-group  btn-group-lg success" role="group">
+  <button type="button" class="btn btn-secondary"><a th:href="@{/productList}" class="text-success">Products</a></button></div>
+    <div class="btn-group  btn-group-lg success" role="group">
+  <button type="button" class="btn btn-secondary"> <a th:href="@{/shoppingCart}" class="text-success">Cart</a></button></div>
+  <div class="btn-group  btn-group-lg success" role="group">
+  <th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')"><button type="button" class="btn btn-secondary"><a th:href="@{/admin/orderList}" class="text-success">Order List</a></button></th:block>
+  <th:block sec:authorize="hasRole('ROLE_MANAGER')"><button type="button" class="btn btn-secondary"><a th:href="@{/admin/product}" class="text-success">Add New Product</a></button></th:block>
+</div>
+</div>
+</div>
+</body>
+</div>

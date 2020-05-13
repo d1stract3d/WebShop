@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8">
+      <title>Product List</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   </head>
+    <body style="background-color: #6c757d;">
+       <nav class="navbar navbar-dark bg-dark"><th:block th:include="/_header"></th:block></nav>
+     <div class="container">
+		<th:block th:include="/_menu"></th:block>
+		<br>
+		<h3 class="text-success">Order List</h3>
+		<br>
+		<ul class="list-group">
+		<li class="list-group-item list-group-item-success">Total: <span
+				th:utext="${paginationResult.totalRecords}"></span></li>
+		</ul>
+		<br>
+		<div th:each="orderInfo : ${paginationResult.list}">
+		<ul class="list-group list-group-horizontal">
+			<li class="list-group-item list-group-item-success">Order #:<br><span
+				th:utext="${orderInfo.orderNum}"></span></li>
+			<li class="list-group-item list-group-item-success">Order Date:<br><span
+				th:utext="${#dates.format(orderInfo.orderDate,'dd-MM-yyyy HH:mm')}"></span></li>
+				<li class="list-group-item list-group-item-success">Customer:<br><span
+				th:utext="${orderInfo.customerName}"></span></li>
+				<li class="list-group-item list-group-item-success">Address:<br><span
+				th:utext="${orderInfo.customerAddress}"></span></li>
+				<li class="list-group-item list-group-item-success">Email:<br><span
+				th:utext="${orderInfo.customerEmail}"></span></li>
+				<li class="list-group-item list-group-item-success">Amount:<br>$<span
+				th:utext="${orderInfo.amount}"></span></li>
+				<li class="list-group-item list-group-item-success"><a
+				th:href="@{|/admin/order?orderId=${orderInfo.id}|}" class="text-success">View</a></li>
+
+		</ul>
+						<br>
+						</div>
+		<div class="btn-group" role="group" th:if="${paginationResult.totalPages > 1}" >
+         <th:block th:each="page: ${paginationResult.navigationPages}">
+         <button type="button" class="btn btn-success"><a th:if="${page != -1}" class="text-white"
+               th:href="@{|/admin/orderList?page=${page}|}" th:utext="${page}" ></a></button>
+         </th:block></div>
+	</div>
+   </body>
+</html>
